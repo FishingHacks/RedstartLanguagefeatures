@@ -1,0 +1,45 @@
+{
+  "name": "redstart-configuration",
+  "displayName": "RedStart Configuration",
+  "description": "Syntax highlighting for the RedStart configuration file",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": ["*"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "rsproj",
+        "aliases": [
+          "RedStart Project",
+          "rsproj"
+        ],
+        "extensions": [
+          ".rsproj"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rsproj",
+        "scopeName": "source.rsproj",
+        "path": "./syntaxes/rsproj.tmLanguage.json"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.1",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+  "main": "./out/extension"
+}

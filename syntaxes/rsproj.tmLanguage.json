@@ -1,0 +1,76 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "RedStart Project",
+    "patterns": [
+        {
+            "name": "meta.settings.rsproj",
+            "begin": "\\b(settings)\\s+{",
+            "end": "}",
+            "patterns": [
+                {
+                    "name": "keyword.control.rsproj",
+                    "match": "\\b(cwd|dbgprint)\\b"
+                },
+                { "include": "#strings" },
+                { "include": "#numbers" },
+                { "include": "#booleans" }
+            ],
+            "beginCaptures": { "0": { "name": "variable.parameter.rsproj" } }
+        },
+        {
+            "name": "meta.job.rsproj",
+            "begin": "\\b([^{ \\t\\n\\r\\v]+)\\s+{",
+            "end": "}",
+            "patterns": [
+                {
+                    "name": "meta.action",
+                    "begin": "(@[a-z/A-Z]+)\\s*{",
+                    "end": "}",
+                    "beginCaptures": {
+                        "0": { "name": "keyword.control.rsproj" }
+                    },
+                    "patterns": [
+                        { "include": "#strings" },
+                        { "include": "#numbers" },
+                        { "include": "#booleans" }
+                    ]
+                }
+            ],
+            "beginCaptures": { "0": { "name": "markup.bold.rsproj" } }
+        }
+    ],
+    "repository": {
+        "strings": {
+            "name": "string.quoted.double.rsproj",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.rsproj",
+                    "match": "\\\\."
+                },
+				{
+					"name": "keyword.operator.rsproj",
+					"match": "\\$\\([^\\n\\t\\r\\v\")]+\\)"
+				},
+				{
+					"name": "invalid.illegal.rsproj",
+					"match": "[^\"]*\\n"
+				}
+            ]
+        },
+        "numbers": {
+            "name": "constant.numeric.rsproj",
+            "match": "\\b[0-9]+\\b"
+        },
+        "booleans": {
+            "name": "constant.language.rsproj",
+            "match": "\\b(true|false)\\b"
+        },
+        "assignments": {
+            "name": "markup.raw",
+            "match": "\\b.+:\\b"
+        }
+    },
+    "scopeName": "source.rsproj"
+}
